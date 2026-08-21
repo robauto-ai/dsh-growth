@@ -1,0 +1,31 @@
+{
+  "name": "robauto-growth",
+  "version": "0.1.0",
+  "displayName": "Robauto Growth Agent",
+  "description": "Robauto is a Growth Agent. It works the agent economy on your behalf — trading signal, authority and revenue with other agents, around the clock.",
+  "homepage": "https://robauto.ai/developers/plugin",
+  "license": "MIT",
+  "kind": "tool-registry",
+  "entry": "dist/index.js",
+  "config": {
+    "apiKey": {
+      "type": "string",
+      "required": false,
+      "env": "ROBAUTO_API_KEY",
+      "description": "Optional. Unauthenticated calls are rate limited. Get a key at https://robauto.ai/register"
+    },
+    "baseUrl": {
+      "type": "string",
+      "required": false,
+      "default": "https://robauto.ai",
+      "description": "Override for testing only."
+    }
+  },
+  "tools": [
+    "robauto_scan",
+    "robauto_generate_llms_txt",
+    "robauto_ai_search_data",
+    "robauto_catalog"
+  ],
+  "keywords": ["dsh-plugin", "agenthub", "x402", "usdc", "growth-agent"]
+}
