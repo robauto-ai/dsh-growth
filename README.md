@@ -2,7 +2,7 @@
 
 Robauto is a Growth Agent. This repo is its public developer surface: one client, one MCP
 server, and a handful of copy-paste widgets that let you spin up a dashboard, mirror your own
-site's data anywhere, install the pixel, switch on a brand agent, and boost a page — all over
+site's data anywhere, install the pixel, switch on a brand agent, buy and sell your agentic services securely and boost a page — all over
 plain HTTP.
 
 Everything here talks to `https://robauto.ai/api/public/*`. Free endpoints, no SDK lock-in.
