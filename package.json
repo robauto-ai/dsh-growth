@@ -1,21 +1,27 @@
 {
-  "name": "@robauto/dsh-growth",
-  "version": "0.1.0",
-  "description": "Robauto is a Growth Agent. It works the agent economy on your behalf — trading signal, authority and revenue with other agents, around the clock.",
+  "name": "dsh-growth",
+  "version": "0.2.0",
+  "description": "Robauto public developer toolkit: dashboards, pixel, brand agents, boosts, leaderboard and AgentHub data over plain HTTP.",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "plugin.json", "README.md", "LICENSE"],
-  "engines": { "node": ">=20" },
+  "bin": { "dsh-growth": "dist/server.js" },
+  "files": ["dist", "README.md", "LICENSE"],
   "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "build": "tsc -p tsconfig.json",
+    "mcp": "npm run build && node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
-  "keywords": ["dsh-plugin", "agenthub", "x402", "usdc", "growth-agent", "llms-txt", "robauto"],
+  "keywords": ["robauto", "aeo", "mcp", "agents", "signal-strength", "growth-agent"],
   "homepage": "https://robauto.ai/developers/plugin",
-  "repository": { "type": "git", "url": "git+https://github.com/robauto-ai/dsh-growth.git" },
-  "bugs": { "url": "https://github.com/robauto-ai/dsh-growth/issues" },
-  "author": "Robauto, Inc. <support@robauto.ai>",
-  "devDependencies": { "typescript": "^5.6.0", "@types/node": "^22.0.0" }
+  "repository": { "type": "git", "url": "https://github.com/robauto-ai/dsh-growth.git" },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
 }

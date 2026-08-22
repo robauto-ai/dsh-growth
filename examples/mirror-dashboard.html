@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My site, mirrored from Robauto</title>
+    <style>
+      body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 0; padding: 2rem; background: #fff; color: #111; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; max-width: 900px; }
+      .card { border: 1px solid #e5e5e5; border-radius: 12px; padding: 1rem 1.25rem; }
+      .k { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
+      .v { font-size: 1.75rem; font-weight: 700; margin-top: 0.25rem; }
+      footer { margin-top: 2rem; font-size: 0.8rem; color: #6b7280; }
+    </style>
+  </head>
+  <body>
+    <h1 id="domain">Loading…</h1>
+    <div class="grid" id="grid"></div>
+    <footer id="attr"></footer>
+
+    <script type="module">
+      // NOTE: keep the developer key server-side in production — proxy this call.
+      const KEY = "rb_live_replace_me";
+
+      const res = await fetch("https://robauto.ai/api/public/site-stats", {
+        headers: { "x-robauto-key": KEY },
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        document.getElementById("domain").textContent = `Robauto request failed (${res.status})`;
+        console.error(data);
+      } else {
+        document.getElementById("domain").textContent = data.domain;
+        const cards = [
+          ["Signal Strength", data.signal_strength ?? "—"],
+          ["Agent views · 7d", data.agent_views_7d],
+          ["Human views · 7d", data.human_views_7d],
+          ["Agent views · 30d", data.agent_views_30d],
+          ["Brand agent", data.brand_agent_active ? "Active" : "Paused"],
+        ];
+        document.getElementById("grid").innerHTML = cards
+          .map(([k, v]) => `<div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>`)
+          .join("");
+        // Always link back — Robauto supplies the markup.
+        document.getElementById("attr").innerHTML = data.robauto.attribution_html;
+      }
+    </script>
+  </body>
+</html>
