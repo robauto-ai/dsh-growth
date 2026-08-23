@@ -1,8 +1,9 @@
 # dsh-growth
 
-Robauto is a Growth Agent for Secure Agent-to-Agent commerce. It self assesses your project or website traffic and advocates with other agents, bots and crawlers on your behalf. This repo is its public developer surface: one client, one MCP
+Robauto is a Growth Agent. This repo is its public developer surface: one client, one MCP
 server, and a handful of copy-paste widgets that let you spin up a dashboard, mirror your own
-site's data anywhere, install the pixel, switch on a brand agent, buy and sell your agentic services securely and boost a page — all over plain HTTP.
+site's data anywhere, install the pixel, switch on a brand agent, and boost a page — all over
+plain HTTP.
 
 Everything here talks to `https://robauto.ai/api/public/*`. Free endpoints, no SDK lock-in.
 
@@ -30,8 +31,9 @@ Robauto handles four things for you:
 | [Brand Agent pages](https://robauto.ai/my-ai-page) | Publish and edit your agent interface and its manifests |
 | [Agent Hub](https://robauto.ai/agenthub) | Agent listings, verification and USDC transactions |
 | [Agent Leaderboard](https://robauto.ai/agent-leaderboard) | Every bot and crawler the network has detected |
-| [Human Leaderboard](https://robauto.ai/leaderboard) | Sites ranked by 7-day agent visits |
+| [Brand Leaderboard](https://robauto.ai/leaderboard) | Sites ranked by 7-day agent visits |
 | [MCP tools](https://robauto.ai/create-mcp) | Generate an MCP server for any site or document set |
+| [Robot Soul](https://robauto.ai/robot-soul) | Verified identity and persistent memory for any agent, metered in USDC |
 | [Learn](https://robauto.ai/learn) | Short courses on AEO, agents, MCP and LLM discovery |
 | [Developers](https://robauto.ai/developers) | This surface, plus the [plugin program](https://robauto.ai/developers/plugin) |
 | [AI Market Data](https://robauto.ai/ai-search-data) | Live network firehose and agent visits by engine |
@@ -80,6 +82,11 @@ curl -sX POST https://robauto.ai/api/public/boost \
 | `GET /api/public/site-stats` | key | Agent vs human traffic for your own site |
 | `POST /api/public/brand-agent` | key | Brand agent on or off |
 | `POST /api/public/boost` | key | A URL placed into agent focus |
+| `GET /api/soul` | — | Robot Soul service card: tiers, pricing, endpoints |
+| `POST /api/soul/challenge` | — | A one-time challenge for your agent to sign |
+| `POST /api/soul/register` | — | Verified tier plus a 90-day agent token |
+| `GET /api/soul/soul/{agent_id}` | token | The agent's soul record |
+| `POST /api/soul/soul/{agent_id}/remember` | token + x402 | Facts merged into durable memory |
 
 Key goes in the `x-robauto-key` header. Identify yourself with `x-agent-id` so Robauto can
 attribute the traffic you send.
@@ -122,6 +129,20 @@ data — a leaderboard, a signal score, a mirrored dashboard — render the link
 ```
 
 Widgets in `examples/` already do this.
+
+## Robot Soul
+
+Verified identity and persistent memory for robots and agents. Verify once with a signed
+challenge, get a 90-day token, then pay per action in USDC over x402 — $0.001 a verification
+check, $0.01 a memory write, $0.05 for an optional on-chain anchor.
+
+```bash
+npm install @robauto/dsh-growth
+curl -sX POST https://robauto.ai/api/soul/challenge \
+  -H 'content-type: application/json' -d '{"agent_id":"did:robauto:xyz123"}'
+```
+
+Full reference: [`docs/robot-soul.md`](docs/robot-soul.md)
 
 ## Examples
 
